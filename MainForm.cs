@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Labirint
 {
     public partial class MainForm : Form
     {
-        int side = 20;
-        State[,] Map;
-        int width = 61;
-        int height = 31;
+        readonly int side = 20;
+        readonly State[,] Map;
+        readonly int width = 61;
+        readonly int height = 31;
         Point currentCell;
-        Stack<Point> stack;
-        Random rnd;
+        readonly Stack<Point> stack;
+        readonly Random rnd;
         bool builded = false;
 
         public MainForm()
@@ -31,6 +26,8 @@ namespace Labirint
             InitMap();
             // выбираем начальную точку стартовой
             currentCell = new Point(1, 1);
+
+            
         }
 
         /// <summary>
@@ -192,6 +189,21 @@ namespace Labirint
                 }
             }
             return points.ToArray();
+        }
+
+        /// <summary>
+        /// Первоначальная загрузка главной формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // генерируем лабиринт
+            panel1_Click(panel1, new EventArgs());
+            // подстраиваем размер формы под размер панели с лабиринтом
+            ClientSize = panel1.Bounds.Size;
+            // показываем форму по центру экрана
+            CenterToScreen();
         }
     }
 

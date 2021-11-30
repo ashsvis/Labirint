@@ -49,7 +49,8 @@ namespace Labirint
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Name = "MainForm";
-            this.Text = "Генератор лабиринтов";
+            this.Text = "Генератор лабиринтов (кликните на лабиринте для генерации нового лабиринта)";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }

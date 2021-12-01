@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Labirint
@@ -18,6 +20,7 @@ namespace Labirint
 
         public MainForm()
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
             InitializeComponent();
             panel1.Size = new Size(width * side, height * side);
             stack = new Stack<Point>();
@@ -201,9 +204,16 @@ namespace Labirint
             // генерируем лабиринт
             panel1_Click(panel1, new EventArgs());
             // подстраиваем размер формы под размер панели с лабиринтом
-            ClientSize = panel1.Bounds.Size;
+            var w = panel1.Bounds.Size.Width;
+            var h = panel1.Bounds.Size.Height + menuStrip1.Height;
+            ClientSize = new Size(w, h);
             // показываем форму по центру экрана
             CenterToScreen();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 

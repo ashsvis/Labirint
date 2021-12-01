@@ -29,35 +29,63 @@ namespace Labirint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.filesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(349, 324);
-            this.panel1.TabIndex = 0;
             this.panel1.Click += new System.EventHandler(this.panel1_Click);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filesToolStripMenuItem});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.Name = "menuStrip1";
+            // 
+            // filesToolStripMenuItem
+            // 
+            this.filesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.filesToolStripMenuItem.Name = "filesToolStripMenuItem";
+            resources.ApplyResources(this.filesToolStripMenuItem, "filesToolStripMenuItem");
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Генератор лабиринтов (кликните на лабиринте для генерации нового лабиринта)";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem filesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

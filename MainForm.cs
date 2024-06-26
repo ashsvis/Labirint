@@ -12,7 +12,7 @@ namespace Labirint
         readonly int side = 20;
         readonly State[,] Map;
         readonly int width = 61;
-        readonly int height = 31;
+        readonly int height = 41;
         Point currentCell;
         readonly Stack<Point> stack;
         readonly Random rnd;
@@ -52,22 +52,49 @@ namespace Labirint
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            for (int x = 0; x < width; x++)
-                for (int y = 0; y < height; y++)
+            var pan = (Panel)sender;
+            using (var image = new Bitmap(pan.Width, pan.Height))
+            using (var g = Graphics.FromImage(image))
+            {
+                for (int x = 0; x < width; x++)
                 {
-                    switch (Map[x, y])
+                    for (int y = 0; y < height; y++)
                     {
-                        case State.Cell:
-                            DrawBox(x, y, Brushes.White, e.Graphics);
-                            break;
-                        case State.Wall:
-                            DrawBox(x, y, Brushes.Black, e.Graphics);
-                            break;
-                        case State.Visited:
-                            DrawBox(x, y, Brushes.Red, e.Graphics);
-                            break;
+                        var rect = new Rectangle(x * side, y * side, side, side);
+                        switch (Map[x, y])
+                        {
+                            case State.Wall:
+                                g.DrawBox(rect, Brushes.Brown);
+                                break;
+                        }
                     }
                 }
+
+                var k = side / 2 - 1;
+                using (var pen = new Pen(Color.White, k))
+                {
+                    g.DrawRectangle(pen, k / 2, k / 2, pan.Width - k, pan.Height - k);
+                }
+                for (int x = 0; x < width; x++)
+                {
+                    for (int y = 0; y < height; y++)
+                    {
+                        var rect = new Rectangle(x * side, y * side, side, side);
+                        switch (Map[x, y])
+                        {
+                            case State.Cell:
+                                rect.Inflate(k, k);
+                                g.DrawBox(rect, Brushes.White);
+                                break;
+                            case State.Visited:
+                                rect.Inflate(k, k);
+                                g.DrawBox(rect, Brushes.Red);
+                                break;
+                        }
+                    }
+                }
+                e.Graphics.DrawImage(image, new Point());
+            }
         }
 
         /// <summary>
